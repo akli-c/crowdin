@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Project;
 use App\Entity\Sources;
 use App\Entity\Projects;
 use App\Form\ProjectsType;
-use App\Repository\LanguageRepository;
 use App\Repository\SourcesRepository;
+use App\Repository\LanguageRepository;
 use App\Repository\ProjectsRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\LanguageType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
 
 
 #[Route('/projects')]
@@ -70,11 +73,17 @@ public function readCsvFile(int $id,Request $request, SourcesRepository $sources
             
     
 }
+
+    public function __construct(private ManagerRegistry $doctrine) {}
+
     #[Route('/', name: 'app_projects_index', methods: ['GET'])]
-    public function index(ProjectsRepository $projectsRepository): Response
+    public function index(ProjectsRepository $projectsRepository, ManagerRegistry $doctrine): Response
     {
+        $this->doctrine = $doctrine;
+        $projects = $doctrine->getRepository(Projects::class)->findAll();
+        
         return $this->render('projects/index.html.twig', [
-            'projects' => $projectsRepository->findAll(),
+            'projects' => $projects,
         ]);
     }
 
@@ -92,19 +101,17 @@ public function readCsvFile(int $id,Request $request, SourcesRepository $sources
             return $this->redirectToRoute('app_projects_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        $languages = $languageRepository->findAll();
-
 
         return $this->renderForm('projects/new.html.twig', [
             'project' => $project,
             'form' => $form,
-            'languages' => $languages
         ]);
     }
 
     #[Route('/{id}', name: 'app_projects_show', methods: ['GET'])]
     public function show(Projects $project): Response
     {
+        
         return $this->render('projects/show.html.twig', [
             'project' => $project,
         ]);
@@ -121,7 +128,7 @@ public function readCsvFile(int $id,Request $request, SourcesRepository $sources
 
             return $this->redirectToRoute('app_projects_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        
         return $this->renderForm('projects/edit.html.twig', [
             'project' => $project,
             'form' => $form,

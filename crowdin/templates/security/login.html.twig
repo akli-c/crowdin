@@ -9,11 +9,14 @@
     {% endif %}
 
     {% if app.user %}
-        <div class="mb-3">
+        <div class="my-5 text-center">
             Salut, Hello, Salam, Hola {{ app.user.userIdentifier }} ! 
              <br><br>
-             <a href="{{ path('app_logout') }}">Déconnexion</a>
-            <a href="user/{{ app.user.id }}">Mon profil</a>
+             <a class="btn btn-danger" href="{{ path('app_logout') }}">Log out</a>
+            <a class="btn btn-dark" href="user/{{ app.user.id }}">My profile</a>
+            <a class="btn btn-light" href="projects">Projects</a>
+
+
         </div>
     {% else %}
 
@@ -22,9 +25,9 @@
         <div class="form_connexion">
             <label for="inputEmail">Email</label>
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-            <label for="inputPassword">Mot de Passe</label>
+            <label for="inputPassword">Password</label>
             <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-            <p class="b-subtext">Nouveau ? <a href="{{ path('app_user_new')}}" style="color: rgb(24, 76, 187);" >Rejoignez-nous </a></p>
+            <p class="b-subtext">New ? <a style="text-decoration:none"href="{{ path('app_user_new')}}" style="color: rgb(24, 76, 187);" >Join us </a></p>
  
             <input type="hidden" name="_csrf_token"
                 value="{{ csrf_token('authenticate') }}"
@@ -40,7 +43,7 @@
                 </div>
             #}
 
-            <button class="btn btn-lg btn-primary sinscrire" type="submit" style="background-color: rgb(24, 76, 187);"> Se connecter </button>
+            <button class="btn btn-lg btn-primary sinscrire" type="submit" style="background-color: rgb(24, 76, 187);">Log In </button>
         </div>
         <div class="image_connexion"></div>
 

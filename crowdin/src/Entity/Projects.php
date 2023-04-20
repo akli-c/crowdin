@@ -23,23 +23,20 @@ class Projects
     #[ORM\ManyToOne(inversedBy: 'projects')]
     private ?User $userId = null;
 
-    #[ORM\ManyToMany(targetEntity: Language::class)]
-    private Collection $langueOrigine;
+    #[ORM\ManyToOne(targetEntity: Language::class)]
+    private ?Language $langueOrigine = null;
 
     #[ORM\OneToMany(mappedBy: 'idProject', targetEntity: Sources::class)]
     private Collection $sources;
 
-
     public function __construct()
     {
         $this->sources = new ArrayCollection();
-        $this->langueOrigine = new ArrayCollection();
-
     }
 
     public function __toString()
     {
-    return $this->nom;
+        return $this->nom;
     }
 
     public function getId(): ?int
@@ -71,31 +68,17 @@ class Projects
         return $this;
     }
 
-
-    /**
-     * @return Collection<int, language>
-     */
-    public function getLangueOrigine(): Collection
+    public function getLangueOrigine(): ?Language
     {
         return $this->langueOrigine;
     }
 
-    public function addLangueOrigine(language $langueOrigine): self
+    public function setLangueOrigine(?Language $langueOrigine): self
     {
-        if (!$this->langueOrigine->contains($langueOrigine)) {
-            $this->langueOrigine->add($langueOrigine);
-        }
+        $this->langueOrigine = $langueOrigine;
 
         return $this;
     }
-
-    public function removeLanguage(language $langueOrigine): self
-    {
-        $this->langueOrigine->removeElement($langueOrigine);
-
-        return $this;
-    }
-
 
     /**
      * @return Collection<int, Sources>

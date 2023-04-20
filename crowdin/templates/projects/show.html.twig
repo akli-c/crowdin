@@ -5,24 +5,16 @@
 {% block body %}
     <h1>Projects</h1>
 
-    <table class="table">
+    <table class="table table-bordered">
         <tbody>
+
             <tr>
-                <th>Id</th>
-                <td>{{ project.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
+                <th>Project name</th>
                 <td>{{ project.nom }}</td>
             </tr>
             <tr>
-                <th>Langue d'origine</th>
-                <td>
-                {% for language in project.langueOrigine %}
-                        {{ language.language }}
-                        {% if not loop.last %}, {% endif %}
-                    {% endfor %}
-                    {{ project.langueOrigine }}</td>
+                <th>Original language</th>
+                <td>{{project.langueOrigine}}</td>
             </tr>
             <tr>
                 <th>Sources</th>
@@ -33,9 +25,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_projects_index') }}">back to list</a>
+    <a class="btn btn-light" href="{{ path('app_projects_index') }}">Back to list</a>
 
-    <a href="{{ path('app_projects_edit', {'id': project.id}) }}">edit</a>
+    <a class="btn btn-primary" href="{{ path('app_projects_edit', {'id': project.id}) }}">Edit</a>
 
     {{ include('projects/_delete_form.html.twig') }}
 {% endblock %}

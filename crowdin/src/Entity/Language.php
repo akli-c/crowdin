@@ -43,6 +43,11 @@ class Language
         return $this->language;
     }
 
+    public function __toString()
+    {   
+        return $this->language;
+    }
+
     public function setLanguage(string $language): self
     {
         $this->language = $language;
@@ -112,7 +117,7 @@ class Language
         if ($this->projects->removeElement($project)) {
 
             if ($this->users->removeElement($project)) {
-                $project->removeLanguage($this);
+                $project->removeLangueOrigine($this);
             }
         }
 

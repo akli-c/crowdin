@@ -8,28 +8,24 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>Langue d'origine</th>
-                <th>sources</th>
-                <th>actions</th>
+                <th>Sources</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for project in projects %}
             <tr>
-                <td>{{ project.id }}</td>
                 <td>{{ project.nom }}</td>
-                <td>{% for language in project.langueOrigine %}
-                    {{ language.language }}
-                {% endfor %}</td>
+                <td>{{project.langueOrigine}}</td>
                 <td>{% for source in project.sources %}
                     {{ source.titre}}<br>
                 {% endfor %}</td>
                 <td>
-                    <a href="{{ path('app_projects_show', {'id': project.id}) }}">show</a>
-                    <a href="{{ path('app_projects_edit', {'id': project.id}) }}">edit</a>
-                    <a href="{{ path('app_sources_index', {'id': project.id}) }}">Sources</a>
+                    <a class="btn btn-light" href="{{ path('app_projects_show', {'id': project.id}) }}">Show</a>
+                    <a class="btn btn-dark" href="{{ path('app_projects_edit', {'id': project.id}) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ path('app_sources_index', {'id': project.id}) }}">Sources</a>
                 </td>
             </tr>
         {% else %}
@@ -40,5 +36,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_projects_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('app_projects_new') }}">Create new</a>
 {% endblock %}
