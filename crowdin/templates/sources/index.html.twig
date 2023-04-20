@@ -4,35 +4,33 @@
 
 {% block body %}
     <h1>Sources index</h1>
-    <a href="{{ path('app_sources_new', {'idProject': idProject}) }}">Créer une source</a><br>
-     <a href="{{ path('app_source_csv', {'id': idProject}) }}">Importer des sources( csv )</a>
+    <a class="btn btn-success" href="{{ path('app_sources_new', {'idProject': idProject}) }}">Add a new source</a><br>
+     <a class="btn btn-secondary my-2" href="{{ path('app_source_csv', {'id': idProject}) }}">Import sources( csv )</a>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Titre</th>
+                <th>Title</th>
                 <th>Source</th>
-                <th>Langue d'rigine</th>
-                <th>Langue traduction</th>
-                <th>Traduction</th>
-                <th>actions</th>
+                <th>Original language</th>
+                <th>Translate language</th>
+                <th>Translate</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for source in sources %}
             <tr>
-                <td>{{ source.id }}</td>
                 <td>{{ source.titre }}</td>
                 <td>{{ source.contenu }}</td>
                 <td>{{ source.langueOrigin }}</td>
                 <td>{{ source.LangueTraduction }}</td>
                 <td>{%if source.traduction == null %}
-                        <h6>la source n'est pas encore traduite</h6>
+                        <h6>The source is not translated yet</h6>
                     {% endif %}
                 {{ source.traduction }}</td>
                 <td>
-                    <a href="{{ path('app_sources_show', {'id': source.id}) }}">show</a>
-                    <a href="{{ path('app_sources_edit', {'id': source.id}) }}">edit</a>
+                    <a class="btn btn-light"href="{{ path('app_sources_show', {'id': source.id}) }}">Show</a>
+                    <a class="btn btn-dark"href="{{ path('app_sources_edit', {'id': source.id}) }}">Edit</a>
                 </td>
             </tr>
         {% else %}

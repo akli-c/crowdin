@@ -46,7 +46,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
         $user = $token->getUser();
-        $url = $this->urlGenerator->generate('app_user_index', ['id' => $user->getId()]);
+        $url = $this->urlGenerator->generate('app_login', ['id' => $user->getId()]);
         return new RedirectResponse($url);
 
 

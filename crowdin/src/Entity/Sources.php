@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\SourcesRepository;
+use App\Entity\Language;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SourcesRepository;
 
 #[ORM\Entity(repositoryClass: SourcesRepository::class)]
 class Sources
@@ -23,11 +24,11 @@ class Sources
     #[ORM\ManyToOne(inversedBy: 'sources')]
     private ?Projects $idProject = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $langueOrigin = null;
+    #[ORM\ManyToOne(targetEntity: Language::class)]
+    private ?Language $langueOrigine = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $LangueTraduction = null;
+    #[ORM\ManyToOne(targetEntity: Language::class)]
+    private ?Language $langueTraduction = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $traduction = null;
@@ -78,26 +79,27 @@ class Sources
         return $this;
     }
 
-    public function getLangueOrigin(): ?string
+    public function getLangueOrigin(): ?Language
     {
-        return $this->langueOrigin;
+        return $this->langueOrigine;
     }
 
-    public function setLangueOrigin(string $langueOrigin): self
+    public function setLangueOrigin(?Language $langueOrigin): self
     {
-        $this->langueOrigin = $langueOrigin;
+        $this->langueOrigine = $langueOrigin;
 
         return $this;
     }
 
-    public function getLangueTraduction(): ?string
+
+    public function getLangueTraduction(): ?Language
     {
-        return $this->LangueTraduction;
+        return $this->langueTraduction;
     }
 
-    public function setLangueTraduction(string $LangueTraduction): self
+    public function setLangueTraduction(?Language $LangueTraduction): self
     {
-        $this->LangueTraduction = $LangueTraduction;
+        $this->langueTraduction = $LangueTraduction;
 
         return $this;
     }

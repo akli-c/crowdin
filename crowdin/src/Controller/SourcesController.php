@@ -44,7 +44,7 @@ class SourcesController extends AbstractController
             $source->setIdProject($projectsRepository->find($idProject));
             $sourcesRepository->save($source, true);
 
-            return $this->redirectToRoute('app_sources_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_sources_index', ['id' => $idProject], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('sources/new.html.twig', [

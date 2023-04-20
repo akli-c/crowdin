@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use App\Entity\Language;
+use App\Entity\Projects;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -74,6 +75,30 @@ class AppFixtures extends Fixture
             $user->addLanguage($userData['language']);
             $manager->persist($user);
         }
+
+        $projects = [
+            [
+                'nom' => 'My Project',
+                'language' => $manager->getRepository(Language::class)->findOneBy(['code' => 'en']),
+            ],
+            [
+                'nom' => 'My Project2',
+                'language' => $manager->getRepository(Language::class)->findOneBy(['code' => 'ar']),
+            ],
+            [
+                'nom' => 'My Project3',
+                'language' => $manager->getRepository(Language::class)->findOneBy(['code' => 'fr']),
+            ]
+        ];
+        foreach ($projects as $projectData) {
+            $project = new Projects();
+            $project->setNom($projectData['nom']);
+            $project->setLangueOrigine($projectData['language']);
+            $manager->persist($project);
+        }
+
+
+
 
         $manager->flush();
     }
