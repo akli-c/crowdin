@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sources{% endblock %}
+
+{% block body %}
+    <h1>Sources</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ source.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ source.titre }}</td>
+            </tr>
+            <tr>
+                <th>source</th>
+                <td>{{ source.contenu }}</td>
+            </tr>
+            <tr>
+                <th>Langue d'origine</th>
+                <td>{{ source.langueOrigin }}</td>
+            </tr>
+            <tr>
+                <th>Langue de traduction</th>
+                <td>{{ source.LangueTraduction }}</td>
+            </tr>
+            <tr>
+                <th>Traduction</th>
+                <td>{{ source.traduction }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('app_sources_edit', {'id': source.id}) }}">edit</a>
+
+    
+{% endblock %}

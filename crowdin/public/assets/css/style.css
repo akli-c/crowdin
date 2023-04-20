@@ -1,0 +1,76 @@
+.page-inscription{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 30px;
+}
+
+.form_inscription{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+    padding-left: 30px;
+}
+
+
+.image_inscription{
+
+    background-image: url("/assets/image_inscription.webp");
+    height: 400px;
+    width: 400px;
+}
+
+
+
+.titre_inscription{
+    margin-top: 30px;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: rgb(24, 76, 187);
+
+}
+
+
+.page_connexion{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 30px;
+}
+
+.form_connexion{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+    padding-left: 30px;
+}
+
+
+.image_connexion {
+    background-image: url(/assets/image_connexion.webp);
+    height: 400px;
+    width: 400px;
+    background-size: 100%;
+}
+
+.titre_connexion{
+    margin-top: 30px;   
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: rgb(24, 76, 187);
+
+}
+
+
