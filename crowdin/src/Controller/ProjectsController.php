@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Project;
 use App\Entity\Sources;
+use App\Entity\Language;
 use App\Entity\Projects;
 use App\Form\ProjectsType;
 use App\Repository\SourcesRepository;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\LanguageType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,8 +31,20 @@ public function readCsvFile(int $id,Request $request, SourcesRepository $sources
 {
     $form = $this->createFormBuilder();
     $form->add('Sources',FileType::class)
-    ->add('langue_origin',LanguageType::class)
-    ->add('langue_traduction',LanguageType::class);
+    ->add('langueOrigin', EntityType::class, [
+        'class' => Language::class,
+        'choice_label' => 'language',
+        'multiple' => false,
+        'label' => 'Select original language',
+        'attr' => ['class' => 'my-3 form-control', 'placeholder' => 'Select the original language ...']
+    ])
+    ->add('langueTraduction', EntityType::class, [
+        'class' => Language::class,
+        'choice_label' => 'language',
+        'multiple' => false,
+        'label' => 'Select translate language',
+        'attr' => ['class' => 'my-3 form-control', 'placeholder' => 'Select the translate language ...']
+    ]);
     $form = $form->getForm();
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
