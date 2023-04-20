@@ -55,6 +55,9 @@ class UserController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $this->hasher->hashPassword($user, $form->get("password")->getData())
+            );
             $userRepository->save($user, true);
     
             return $this->render('user/show.html.twig', [
